@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+
+{% block contents %}
+<body>
+<br>                
+{% for blog in blogs.all %}
+
+<div class="container"></div>
+<div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h1>제목 : {{blog.title}}</h1>
+      <p>날자 : {{blog.pub_date}}</p>
+      <p class="card-text">본문 미리보기 : {{blog.summary}}<a href = "{%url 'detail' blog.id%}"><br>...more </a> </p>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+<!-- First Previous 3of4 next last -->
+<div class="container">
+{% if posts.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{posts.previous_page_number}}">Previous</a>
+{% endif %}
+
+<span>{{posts.number}}</span>
+<span>of</span>
+<span>{{posts.paginator.num_pages}}</span>
+
+{% if posts.has_next %}
+<a href="?page={{posts.next_page_number}}">Next</a>
+<a href="?page={{posts.paginator.num_pages}}">Last </a>
+{% endif %}
+</div>
+
+{%endblock%}
+</body>
+
+<!-- {% for blog in blogs.all%}
+    <h1>제목 : {{blog.title}}</h1>
+    <p>날자 : {{blog.pubb_date}}</p>
+    <p>본문 미리보기 : {{blog.summary}}<a href = "{%url 'detail' blog.id%}"><br>...more </a> </p>
+    <br><br>
+{%endfor%} -->
